@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+    <body>
+        {% for k,v in registration.lti_registration_data.items %}
+        <dt>{{k}}</dt>
+        <dd><code>{{v}}</code></dd>
+        {% endfor %}
+
+        <script>
+            (window.opener || window.parent).postMessage({subject:'org.imsglobal.lti.close'}, '*');
+        </script>
+    </body>
+
+    {{lti_tool}}
+</html>

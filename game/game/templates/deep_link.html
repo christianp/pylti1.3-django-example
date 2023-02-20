@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% include "greeting.html" with role="teacher" %}
+
+<form method="POST" action="{% url 'game-complete-deep-link' %}">
+    <input type="hidden" name="launch_id" value="{{launch_id}}">
+    <p>Pick a special word to associate with this link.</p>
+
+    <p><label for="special-word">Special word:</label> <input type="text" pattern="\w+" required title="Write a single word" name="special-word" id="special-word"></p>
+
+    <p>The link's title and the custom parameter <code>special_word</code> will be set.</p>
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock main %}

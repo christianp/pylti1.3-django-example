@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block main %}
+{% include "greeting.html" with role="teacher" %}
+
+<nav>
+    <ul>
+        <li><a href="{% url 'scoreboard' launch_id=launch_id %}">Membership and scores</a></li>
+        <li><a href="{% url 'launch_data' launch_id=launch_id %}">Launch data</a></li>
+    </ul>
+</nav>
+
+{% endblock main %}

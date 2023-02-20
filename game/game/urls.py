@@ -1,12 +1,16 @@
-from django.urls import re_path
-from .views import login, launch, get_jwks, configure, score, scoreboard
+from django.contrib import admin
+from django.urls import re_path, path
+from .views import LoginView, LaunchView, JWKSView, CompleteDeepLinkView, SetScoreView, ScoreboardView, LaunchDataView, register
 
 urlpatterns = [
-    re_path(r'^login/$', login, name='game-login'),
-    re_path(r'^launch/$', launch, name='game-launch'),
-    re_path(r'^jwks/$', get_jwks, name='game-jwks'),
-    re_path(r'^configure/(?P<launch_id>[\w-]+)/(?P<difficulty>[\w-]+)/$', configure, name='game-configure'),
-    re_path(r'^api/score/(?P<launch_id>[\w-]+)/(?P<earned_score>[\w-]+)/(?P<time_spent>[\w-]+)/$', score,
-            name='game-api-score'),
-    re_path(r'^api/scoreboard/(?P<launch_id>[\w-]+)/$', scoreboard, name='game-api-scoreboard'),
+    path('admin/', admin.site.urls),
+    path(r'login/', LoginView.as_view(), name='game-login'),
+    path(r'register/', register, name='register'),
+    path(r'launch/', LaunchView.as_view(), name='game-launch'),
+    path(r'jwks/', JWKSView.as_view(), name='game-jwks'),
+    path(r'complete-deep-link/', CompleteDeepLinkView.as_view(), name='game-complete-deep-link'),
+    re_path(r'^api/score/(?P<launch_id>[\w-]+)/$', SetScoreView.as_view(),
+         name='game-api-set-score'),
+    re_path(r'^scoreboard/(?P<launch_id>[\w-]+)/$', ScoreboardView.as_view(), name='scoreboard'),
+    re_path(r'^launch-data/(?P<launch_id>[\w-]+)/$', LaunchDataView.as_view(), name='launch_data'),
 ]

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block main %}
+{% include "greeting.html" with role="student" %}
+
+<form method="POST" action="{% url 'game-api-set-score' launch_id=launch_id %}">
+    <p>What score would you like?</p>
+
+    <p>
+        <label for="score">Score</label>
+        <input id="score" type="number" min="0" max="100" name="score" value="0">
+        (out of 100)
+    </p>
+
+    <p>
+        <label for="activity-progress"><a href="https://www.imsglobal.org/spec/lti-ags/v2p0#activityprogress">Activity progress</a></label>
+        <select id="activity-progress" name="activity-progress">
+            <option value="Initialized">Initialized</option>
+            <option value="Started">Started</option>
+            <option value="InProgress">In progress</option>
+            <option value="Submitted">Submitted</option>
+            <option value="Completed">Completed</option>
+        </select>
+    </p>
+
+    <p>
+        <label for="grading-progress"><a href="https://www.imsglobal.org/spec/lti-ags/v2p0#gradingprogress">Grading progress</a></label>
+        <select id="grading-progress" name="grading-progress">
+            <option value="FullyGraded">Fully graded</option>
+            <option value="Pending">Pending</option>
+            <option value="PendingManual">Pending (manual)</option>
+            <option value="Failed">Failed</option>
+            <option value="NotReady">Not ready</option>
+        </select>
+    </p>
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock main %}

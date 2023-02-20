@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block main %}
+<p>This table shows the membership of this resource, along with their role and any recorded score.</p>
+
+<p>The membership data comes from the <a href="http://www.imsglobal.org/spec/lti-nrps/v2p0">Names and Roles Provisioning Service</a>.</p>
+
+<p>The score data comes from the <a href="https://www.imsglobal.org/spec/lti-ags/v2p0#result-service">Result Service</a>.</p>
+
+<p>Scores reported as anything other than "Fully graded" will be displayed as "Pending" - the platform isn't required to send incomplete scores back.</p>
+
+<table cellpadding="8">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>{{member.name}}</td>
+            <td>{% if member.teacher %}Teacher{% else %}{% if member.student %}Student{% endif %}{% endif %}</td>
+            <td>
+                {% if member.score %}
+                    {% if member.score.resultMaximum %}
+                        {{member.score.resultScore}} / {{member.score.resultMaximum}}
+                    {% else %}
+                    Pending
+                    {% endif %}
+                {% else %}
+                    No score
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock main %}

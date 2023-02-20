@@ -1,0 +1,13 @@
+<p>Hi, <strong>{{curr_user_name}}</strong>!</p>
+
+<p>I think you are a {{role}}.</p>
+
+<p>This is a <code>{{message_type}}</code> launch.</p>
+
+{% if special_word %}
+<p>This link used deep-linking to give the special word <strong>{{special_word}}</strong>.</p>
+{% else %}
+<p>This link doesn't have a special word yet. You can use deep-linking to pick a special word while setting up this link.</p>
+{% endif %}
+
+<hr>
