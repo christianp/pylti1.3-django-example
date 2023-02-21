@@ -11,4 +11,5 @@ RUN pip install -r /tmp/requirements.txt
 
 EXPOSE 9001
 CMD python manage.py migrate
+CMD python manage.py createcachetable
 CMD python manage.py runserver 0.0.0.0:9001
